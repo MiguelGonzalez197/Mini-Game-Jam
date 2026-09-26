@@ -10,7 +10,6 @@ public class WinTrigger : MonoBehaviour
     [SerializeField]
     private GameObject loseTrigger;
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -20,4 +19,5 @@ public class WinTrigger : MonoBehaviour
             loseTrigger.SetActive(false);
         }
     }
+
 }

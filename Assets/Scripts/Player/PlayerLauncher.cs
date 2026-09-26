@@ -59,7 +59,8 @@ public class PlayerLauncher : MonoBehaviour
 
     void OnMouseUp()
     {
-        if (!isDragging) return;
+
+        if (!isDragging || !enabled) return;
 
         isDragging = false;
         lr.enabled = false;
