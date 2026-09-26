@@ -1,10 +1,15 @@
 using UnityEngine;
 
+
 public class PlayerLauncher : MonoBehaviour
 {
     [Header("Configuración de Lanzamiento")]
     public float launchForceMultiplier = 5f;
     public float maxDragDistance = 3f;
+
+    [Header("Trayectoria Predictiva")]
+    public int trajectorySteps = 30; // Número de puntos que formarán la curva
+    public float timeStep = 0.05f;   // Tiempo simulado entre cada punto (menor = curva más detallada)
 
     private Rigidbody2D rb;
     private LineRenderer lr;
@@ -16,11 +21,9 @@ public class PlayerLauncher : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
 
-        // Inicializamos el LineRenderer
-        lr.positionCount = 2;
+        lr.positionCount = trajectorySteps;
         lr.enabled = false;
 
-        // Comenzamos anclados
         AnchorPlayer();
     }
 
@@ -29,25 +32,23 @@ public class PlayerLauncher : MonoBehaviour
         if (isDragging)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            // Calculamos el vector en la dirección opuesta al arrastre
             Vector2 dragVector = dragStartPos - mousePos;
 
-            // Limitamos la distancia máxima de arrastre
             if (dragVector.magnitude > maxDragDistance)
             {
                 dragVector = dragVector.normalized * maxDragDistance;
             }
 
-            // Dibujamos la línea visual indicando la dirección y fuerza
-            lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, (Vector2)transform.position + dragVector);
+            // Calculamos la fuerza exacta que se aplicaría
+            Vector2 appliedForce = dragVector * launchForceMultiplier;
+
+            // Dibujamos la parábola basándonos en esa fuerza
+            DrawTrajectory(appliedForce);
         }
     }
 
     void OnMouseDown()
     {
-        // Solo permitimos arrastrar si el jugador está casi quieto (anclado)
         if (rb.linearVelocity.magnitude < 0.1f)
         {
             isDragging = true;
@@ -62,7 +63,7 @@ public class PlayerLauncher : MonoBehaviour
 
         isDragging = false;
         lr.enabled = false;
-        rb.isKinematic = false; // Activamos las físicas para que pueda volar
+        rb.isKinematic = false;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dragVector = dragStartPos - mousePos;
@@ -72,7 +73,6 @@ public class PlayerLauncher : MonoBehaviour
             dragVector = dragVector.normalized * maxDragDistance;
         }
 
-        // Aplicamos la fuerza en modo Impulso
         rb.AddForce(dragVector * launchForceMultiplier, ForceMode2D.Impulse);
     }
 
@@ -80,7 +80,6 @@ public class PlayerLauncher : MonoBehaviour
     {
         if (other.CompareTag("Anchor"))
         {
-            // Centramos al jugador en el anclaje exactamente
             transform.position = other.transform.position;
             AnchorPlayer();
         }
@@ -88,8 +87,33 @@ public class PlayerLauncher : MonoBehaviour
 
     private void AnchorPlayer()
     {
-        rb.isKinematic = true; // Desactiva la gravedad y fuerzas externas
-        rb.linearVelocity = Vector2.zero; // Detiene el movimiento por completo
+        rb.isKinematic = true;
+        rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
+    }
+
+    // Método que calcula e inyecta los puntos curvos al LineRenderer
+    private void DrawTrajectory(Vector2 force)
+    {
+        Vector2 startPos = transform.position;
+
+        // Dado que usamos ForceMode2D.Impulse, Velocidad = Fuerza / Masa
+        Vector2 initialVelocity = force / rb.mass;
+
+        // Aceleración = Gravedad global * Escala de gravedad del Rigidbody
+        Vector2 gravityCalc = Physics2D.gravity * rb.gravityScale;
+
+        lr.positionCount = trajectorySteps;
+
+        for (int i = 0; i < trajectorySteps; i++)
+        {
+            // Tiempo futuro simulado para este punto específico
+            float t = i * timeStep;
+
+            // Aplicamos la fórmula: P(t) = P0 + V0*t + 0.5*a*t^2
+            Vector2 pointPosition = startPos + (initialVelocity * t) + (0.5f * gravityCalc * (t * t));
+
+            lr.SetPosition(i, pointPosition);
+        }
     }
 }
