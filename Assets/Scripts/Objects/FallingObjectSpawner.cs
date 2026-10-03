@@ -28,6 +28,9 @@ public class FallingObjectSpawner : MonoBehaviour
     [Header("Altura a la que nace el objeto, sobre el jugador")]
     public float spawnHeightAbovePlayer = 6f;
 
+    [Header("Rotación inicial del objeto")]
+    public float spawnRotationZ = -90f;
+
     [Header("Referencias")]
     public Transform playerTransform;
     public RectTransform uiCanvasRect; // el RectTransform del Canvas (Screen Space - Overlay)
@@ -58,6 +61,10 @@ public class FallingObjectSpawner : MonoBehaviour
         {
             warningUI = Instantiate(warningUIPrefab, uiCanvasRect);
             PositionWarningUI(warningUI.GetComponent<RectTransform>(), x);
+
+            // Sincroniza la duración del pulso con el tiempo de espera
+            var pulse = warningUI.GetComponent<WarningIconPulse>();
+            if (pulse != null) pulse.SetDuration(warningTime);
         }
 
         yield return new WaitForSeconds(warningTime);
@@ -85,6 +92,8 @@ public class FallingObjectSpawner : MonoBehaviour
         float y = baseY + spawnHeightAbovePlayer;
 
         Vector3 pos = new Vector3(x, y, 0f);
-        Instantiate(fallingObjectPrefab, pos, Quaternion.identity);
+        Quaternion rot = Quaternion.Euler(0f, 0f, spawnRotationZ);
+
+        Instantiate(fallingObjectPrefab, pos, rot);
     }
 }
