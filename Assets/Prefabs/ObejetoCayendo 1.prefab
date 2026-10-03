@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2897097261906593985, guid: 48a567a34f09b944397e5a0f48d2b0a8, type: 3}
+  m_Sprite: {fileID: -1314004168889401887, guid: 191204eccf5d7ee48bc8b2ec20981df2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   fallSpeed: 6
   playerTag: Player
   destroyBelowY: -10
+  avisoIcon: {fileID: 5956678079978678400}
 --- !u!1 &5956678079978678400
 GameObject:
   m_ObjectHideFlags: 0

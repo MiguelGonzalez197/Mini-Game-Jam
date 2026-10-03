@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8957324059118975939, guid: eef724cf567e3a04b99451ba896f00ba, type: 3}
+  m_Sprite: {fileID: -690600558206013080, guid: cb322c7b9d0ff12419723ef4208f6526, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,3 +90,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WarningIconPulse
   pulseSpeed: 14
   pulseAmount: 0.25
+  duration: 1

@@ -28,8 +28,6 @@ public class FallingObjectSpawner : MonoBehaviour
     [Header("Altura a la que nace el objeto, sobre el jugador")]
     public float spawnHeightAbovePlayer = 6f;
 
-    [Header("Rotación inicial del objeto")]
-    public float spawnRotationZ = -90f;
 
     [Header("Referencias")]
     public Transform playerTransform;
@@ -92,8 +90,8 @@ public class FallingObjectSpawner : MonoBehaviour
         float y = baseY + spawnHeightAbovePlayer;
 
         Vector3 pos = new Vector3(x, y, 0f);
-        Quaternion rot = Quaternion.Euler(0f, 0f, spawnRotationZ);
 
+        Quaternion rot = Quaternion.Euler(0f, 0f, 0f);
         Instantiate(fallingObjectPrefab, pos, rot);
     }
 }

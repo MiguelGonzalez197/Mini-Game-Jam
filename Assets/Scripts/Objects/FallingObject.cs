@@ -22,13 +22,19 @@ public class FallingObject : MonoBehaviour
     [Header("Altura mínima antes de destruirse (posición Y del mundo)")]
     public float destroyBelowY = -10f;
 
+    [Header("Aviso (hijo del prefab)")]
+    public GameObject avisoIcon;
+
     private Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 1f;
-        rb.linearVelocity = Vector2.down * fallSpeed; // en versiones antiguas de Unity: rb.velocity
+        rb.linearVelocity = Vector2.down * fallSpeed;
+
+        // Al empezar a caer, oculta solo el icono; el objeto sigue cayendo
+        if (avisoIcon != null) avisoIcon.SetActive(false);
     }
 
     void FixedUpdate()
