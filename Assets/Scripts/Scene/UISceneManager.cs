@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class UISceneManager : MonoBehaviour
 {
     [SerializeField]
-    private Animator restartButtonAnimator_;
+    private Animator restartButtonAnimator;
+    [SerializeField]
+    private string currentScene;
 
     void Start()
     {
@@ -25,7 +27,7 @@ public class SceneManager : MonoBehaviour
     {
         if (restartButtonAnimator == null) return;
 
-        restartButtonAnimator_.CrossFade("Show", 0f);
+        restartButtonAnimator.CrossFade("Show", 0f);
 
     }
 }
