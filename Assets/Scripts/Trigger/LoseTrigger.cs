@@ -5,6 +5,8 @@ using TMPro;
 
 public class LoseTrigger : MonoBehaviour
 {
+    [SerializeField]
+    private UISceneManager uiSceneManager;
 
     [SerializeField]
     private TextMeshProUGUI loseText;
@@ -16,6 +18,8 @@ public class LoseTrigger : MonoBehaviour
         {
             Debug.Log("Perdiste");
             loseText.text = "Perdiste";
+
+            uiSceneManager.ShowRestart();
         }
     }
 }

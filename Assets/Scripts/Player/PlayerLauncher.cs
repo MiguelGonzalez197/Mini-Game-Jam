@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerLauncher : MonoBehaviour
 {
+    [SerializeField]
+    private Animator playerAnimator;
+
     [Header("Configuración de Lanzamiento")]
     public float launchForceMultiplier = 5f;
     public float maxDragDistance = 3f;
@@ -75,12 +78,14 @@ public class PlayerLauncher : MonoBehaviour
         }
 
         rb.AddForce(dragVector * launchForceMultiplier, ForceMode2D.Impulse);
+        PlayAnimation("Impulso");
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Anchor"))
         {
+            PlayAnimation("Salto");
             transform.position = other.transform.position;
             AnchorPlayer();
         }
@@ -116,5 +121,12 @@ public class PlayerLauncher : MonoBehaviour
 
             lr.SetPosition(i, pointPosition);
         }
+    }
+
+    private void PlayAnimation(string animationName)
+    {
+        if (playerAnimator == null) return;
+        Debug.Log(animationName);
+        playerAnimator.CrossFade(animationName, 0f);
     }
 }

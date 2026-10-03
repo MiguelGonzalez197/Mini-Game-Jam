@@ -5,6 +5,7 @@ public class UISceneManager : MonoBehaviour
 {
     [SerializeField]
     private Animator restartButtonAnimator;
+
     [SerializeField]
     private string currentScene;
 
@@ -20,10 +21,10 @@ public class UISceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene("Prueba");
+        SceneManager.LoadScene(currentScene);
     }
 
-    private void ShowRestart()
+    public void ShowRestart()
     {
         if (restartButtonAnimator == null) return;
 

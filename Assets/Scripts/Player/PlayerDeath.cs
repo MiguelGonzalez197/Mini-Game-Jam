@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
+
     [SerializeField]
     private Rigidbody2D playerRigidbody;
     [SerializeField]
