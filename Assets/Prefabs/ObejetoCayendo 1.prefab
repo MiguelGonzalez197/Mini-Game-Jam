@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 2897097261906593985, guid: 48a567a34f09b944397e5a0f48d2b0a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,13 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149481f43e2e0204a9bd1f9daea4fea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FallingObject
-  minWarningTime: 0.6
-  maxWarningTime: 1.4
   fallSpeed: 6
-  warningIcon: {fileID: 5956678079978678400}
-  objectSprite: {fileID: 9142042414034360976}
   playerTag: Player
-  groundTag: Ground
+  destroyBelowY: -10
 --- !u!1 &5956678079978678400
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8026333260146231948}
   - component: {fileID: 2537913291263934078}
+  - component: {fileID: 5375850328322175362}
   m_Layer: 0
   m_Name: Aviso
   m_TagString: Untagged
@@ -268,3 +265,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5375850328322175362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956678079978678400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78554073c80e554e81297c2ec81f489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AvisoPulse
+  pulseSpeed: 15
+  pulseAmount: 0.25
+  duration: 1

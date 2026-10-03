@@ -1317,6 +1317,7 @@ GameObject:
   - component: {fileID: 642273471}
   - component: {fileID: 642273474}
   - component: {fileID: 642273476}
+  - component: {fileID: 642273478}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1400,7 +1401,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 4867081180876856159, guid: 5d9189f8882c0fc4196fd71a1af12928, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1602,6 +1603,28 @@ MonoBehaviour:
   playerRigidbody: {fileID: 642273471}
   playerLauncherComponent: {fileID: 642273475}
   lineRendererComponent: {fileID: 642273476}
+--- !u!95 &642273478
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642273470}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 36de2709ec43c154f9406903e8616c5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &643014157
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,6 +3228,7 @@ MonoBehaviour:
   minX: -8
   maxX: 8
   spawnHeightAbovePlayer: 14
+  spawnRotationZ: -90
   playerTransform: {fileID: 642273473}
   uiCanvasRect: {fileID: 1971043232}
   mainCamera: {fileID: 1643047884}
